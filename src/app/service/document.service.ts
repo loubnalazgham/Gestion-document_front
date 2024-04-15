@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
- 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -47,11 +47,9 @@ export class DocumentService {
     if (nom) params += `&nom=${nom}`;
     if (type) params += `&type=${type}`;
     if (date_de_creation) params += `&date_de_creation=${date_de_creation.toISOString()}`;
-   
     if (params.length > 0) {
       params = '?' + params.substr(1);
     }
- 
     return this.http.get<any[]>(`${this.apiUrl}/search${params}`);
   }
  
@@ -59,3 +57,4 @@ export class DocumentService {
     return this.http.get(`${this.apiUrl}/download/${id}`, { responseType: 'blob' });
   }
 }
+

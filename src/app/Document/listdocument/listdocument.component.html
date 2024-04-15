@@ -38,7 +38,33 @@ $(document).ready(function(){
 </script> -->
 </head>
 <body>
-<div class="container-xl">
+	<div class="container-xl">
+		<div class="column-sm">
+		  <form class="form">
+			<input type="search" class="form-control" placeholder="Search..." aria-label="Search" [(ngModel)]="searchTerm">
+		  </form>
+		</div>
+		<div class="column-sm">
+			<select class="form-select" aria-label="Default select example" [(ngModel)]="selectedType">
+				<option value="" selected disabled>Type</option>
+				<option *ngFor="let type of documentTypes" [value]="type">{{ type }}</option>
+			</select>
+		</div>
+		
+		<div class="column-sm">
+			<input type="date" class="form-control" [(ngModel)]="dateSelected">
+		  </div>
+		  <div class="column-sm">
+			<button class="btn btn-primary" (click)="search()">Search</button>
+		  </div>
+		  <div class="column-sm">
+			<button class="btn btn-primary" (click)="resetFilters()">Reset</button>
+		  </div>
+		  
+	  </div>
+	  
+      <div class="container-xl " class="second">
+
 	<div class="table-responsive">
 		<div class="table-wrapper">
 			<div class="table-title">
@@ -70,43 +96,45 @@ $(document).ready(function(){
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
+					<tr *ngFor="let document of documents">
 						<td>
-							<span class="custom-checkbox">
-								<input type="checkbox" id="checkbox1" name="options[]" value="1">
-								<label for="checkbox1"></label>
-							</span>
+						  <span class="custom-checkbox">
+							<input type="checkbox" id="checkbox{{document.uuid}}" name="options[]" value="{{document.uuid}}">
+							<label for="checkbox{{document.uuid}}"></label>
+						  </span>
 						</td>
-						<td>Thomas Hardy</td>
-						<td>thomashardy@mail.com</td>
-						<td>89 Chiaroscuro Rd, Portland, USA</td>
-						<td>(171) 555-2222</td>
-						<td>
-              <a href="#shareModal" class="share" data-toggle="modal"> <i class="material-icons" data-toggle="tooltip" title="Share">&#xE80D;</i></a>
-              <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+						<td>{{document.nomDocument}}</td> 
+						<td>{{document.typeDocument}}</td> 
+						<td>{{document.dateCreation}}</td> 
+						<td><a href="{{document.linkDocument}}">{{document.linkDocument}}</a></td>
+						<td class="action-icons">
+							<div>
+								<button type="button" class="btn btn-primary btn-sm" (click)="shareDocument()">
+									<i class="material-icons" data-toggle="tooltip" title="Share">&#xE80D;</i>
+								</button>
+							</div>
+						
+							<div>
+								<button type="button" class="btn btn-danger btn-sm" (click)="deleteDocument(document.uuid)">
+									<i class="material-icons">&#xE872;</i>
+								</button>
+							</div>
+							
+							
 						</td>
+						
 					</tr>
 					
 					
 				</tbody>
 			</table>
-			<div class="clearfix">
-				<div class="hint-text">Showing <b>5</b> out of <b>25</b> entries</div>
-				<ul class="pagination">
-					<li class="page-item disabled"><a href="#">Previous</a></li>
-					<li class="page-item"><a href="#" class="page-link">1</a></li>
-					<li class="page-item"><a href="#" class="page-link">2</a></li>
-					<li class="page-item active"><a href="#" class="page-link">3</a></li>
-					<li class="page-item"><a href="#" class="page-link">4</a></li>
-					<li class="page-item"><a href="#" class="page-link">5</a></li>
-					<li class="page-item"><a href="#" class="page-link">Next</a></li>
-				</ul>
-			</div>
+			
 		</div>
 	</div>        
 </div>
 
 
+  
 
 </body>
 </html>
