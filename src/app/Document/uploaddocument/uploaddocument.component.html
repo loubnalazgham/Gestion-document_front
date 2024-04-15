@@ -1,11 +1,31 @@
-<div class="container">
-  <h2>Importer un document</h2>
-  <form>
-    <div class="form-group">
-      <label for="document">Sélectionner un document</label>
-      <input type="file" class="form-control-file" id="document" (change)="importerDocument($event.target.files)">
+
+
+<div class="container d-flex justify-content-center align-items-center mt-5">
+  <div class="card text-center">
+    <div class="card-header">
+      GESTION DES DOCUMENTS
     </div>
-    <!-- Utilisation d'un type "button" au lieu de "submit" -->
-    <button type="button" class="btn btn-primary" (click)="importerDocument()">Importer</button>
-  </form>
+    <div class="card-body">
+      <h5 class="card-title">Upload File</h5>
+      <p class="card-text">Le téléchargement de fichiers se fait depuis un serveur vers l'appareil local d'un utilisateur.</p>
+      <div class="mb-3">
+        <label for="formFile" class="form-label">Upload File</label>
+        <input class="form-control" type="file" id="formFile" #fileInput (change)="checkFile()">
+      </div>
+
+      <div class="container">
+        <h6>Liste dynamique des métadonnées supplémentaires sous forme de paires clé-valeur </h6>
+        <form (ngSubmit)="onSubmit()">
+          <div *ngFor="let attribute of attributes; let i = index" class="mb-3">
+            <input type="text" [(ngModel)]="attribute.key" name="key{{i}}" placeholder="Clé" class="form-control mb-2">
+            <input type="text" [(ngModel)]="attribute.value" name="value{{i}}" placeholder="Valeur" class="form-control">
+          </div>
+          <button type="button" class="btn btn-secondary btn-sm" (click)="addAttribute()">Ajouter autre information</button>
+        </form>
+      </div>
+    </div>
+    <div class="card-footer text-muted">
+      <button class="btn btn-primary" (click)="deposerFichier(fileInput.files[0])" [disabled]="!fileSelected">Déposer</button>
+    </div>
+  </div>
 </div>
