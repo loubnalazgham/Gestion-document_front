@@ -9,6 +9,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
+import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 const routes: Routes = [
@@ -30,7 +31,10 @@ const routes: Routes = [
     ToastrModule.forRoot(),
     BrowserAnimationsModule,
     RouterModule.forRoot(routes),
-    FormsModule
+    FormsModule,
+    NgbModalModule
+
+
   ],
   
   providers: [],
