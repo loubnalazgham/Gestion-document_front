@@ -20,12 +20,13 @@
             <input type="text" [(ngModel)]="attribute.key" name="key{{i}}" placeholder="Clé" class="form-control mb-2">
             <input type="text" [(ngModel)]="attribute.value" name="value{{i}}" placeholder="Valeur" class="form-control">
           </div>
-          <button type="button" class="btn btn-secondary btn-sm" (click)="addAttribute()">Ajouter autre information</button>
+          <button type="button" class="btn btn-warning btn-sm" (click)="addAttribute()">Ajouter autre information</button>
         </form>
       </div>
     </div>
-    <div class="card-footer text-muted">
-      <button class="btn btn-primary" (click)="deposerFichier(fileInput.files[0])" [disabled]="!fileSelected">Déposer</button>
+    <div class="card-footer text-muted d-flex justify-content-between">
+      <button class="btn btn-primary mr-3" (click)="deposerFichier(fileInput.files[0])" [disabled]="!fileSelected">Déposer</button>
+      <button class="btn btn-dark ml-3" (click)="retourListe()">Retour à la liste</button>
     </div>
   </div>
 </div>

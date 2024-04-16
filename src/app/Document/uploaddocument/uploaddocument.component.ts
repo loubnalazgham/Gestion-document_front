@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { DocumentService } from 'src/app/service/document.service';
 import { ToastrUtils } from '../shared/ToastrUtils';
 import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-uploaddocument',
@@ -20,7 +21,7 @@ export class UploaddocumentComponent implements OnInit {
     this.attributes.push({ key: '', value: '' });
   }
 
-  constructor(private documentService:DocumentService,private toastrService:ToastrService) {
+  constructor(private documentService:DocumentService,private toastrService:ToastrService,private router: Router) {
     this.toastrUtils = new  ToastrUtils(this.toastrService);
    }
  
@@ -44,7 +45,8 @@ export class UploaddocumentComponent implements OnInit {
       this.metadata = "{\"metadataSup\":{\"attributes\":["+this.attributesString+"]}}";
 
       this.documentService.addDocument(this.metadata,fichier).subscribe(() => {
-        this.toastrUtils.toastrMsgAddSuccess('Le document');
+      this.toastrUtils.toastrMsgAddSuccess('Le document');
+      // this.router.navigate(['/']);
       },
       (err: HttpErrorResponse) => {
         this.toastrUtils.toastrMsgErrorAlredayExist('Le document');
@@ -56,6 +58,10 @@ export class UploaddocumentComponent implements OnInit {
     } else {
       console.log("Aucun fichier sélectionné.");
     }
+  }
+
+  retourListe(){
+   this.router.navigate(['/']);
   }
 }
 

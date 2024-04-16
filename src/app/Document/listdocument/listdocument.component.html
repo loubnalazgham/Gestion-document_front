@@ -41,7 +41,7 @@ $(document).ready(function(){
 	<div class="container-xl">
 		<div class="column-sm">
 		  <form class="form">
-			<input type="search" class="form-control" placeholder="Search..." aria-label="Search" [(ngModel)]="searchTerm">
+			<input type="search" class="form-control" placeholder="Search..." aria-label="Search" [(ngModel)]="searchTerm" [ngModelOptions]="{standalone: true}">
 		  </form>
 		</div>
 		<div class="column-sm">
