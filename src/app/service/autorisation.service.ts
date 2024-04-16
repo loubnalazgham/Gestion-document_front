@@ -14,4 +14,7 @@ export class AutorisationService {
   addAutorisation(autorisation: Autorisation): Observable<any> {
     return this.http.post<any>(this.apiUrl, autorisation);
   }
+  getAllAutorisations(){
+    return this.http.get<any[]>(this.apiUrl);
+  }
 }

@@ -33,6 +33,7 @@ export class ListdocumentComponent implements OnInit {
               }
   documents: Document[] = [];
   users:User[]=[];
+  autorisations:Autorisation[] = [];
   searchTerm: string = '';
   selectedType: string = '';
   dateSelected: Date; // Assurez-vous que dateSelected est de type Date
@@ -108,6 +109,7 @@ export class ListdocumentComponent implements OnInit {
 // Méthode pour confirmer la suppression du document
 confirmDelete() {
     if (this.selectedDocument) {
+      console.log("loooog == "+this.selectedDocument.uuid)
         this.documentService.deleteDocument(this.selectedDocument.uuid).subscribe(
             () => {
                 console.log('Document supprimé !');
@@ -216,6 +218,19 @@ confirmDelete() {
       link.click();
       window.URL.revokeObjectURL(url);
     });
+  }
+
+  getAllAotorisations(){
+    this.autorisationService.getAllAutorisations().subscribe((response: any[]) => {
+      this.autorisations = response;
+    },
+    (error) => {
+      console.error('Error fetching users:', error);
+    })
+  }
+
+  afficherPopupListe(){
+    this.getAllAotorisations();
   }
 }
 
