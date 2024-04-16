@@ -11,7 +11,7 @@ export class AutorisationService {
 
   constructor(private http: HttpClient) { }
 
-  addAutorisation(autorisation: Autorisation): Observable<Autorisation> {
-    return this.http.post<Autorisation>(this.apiUrl, autorisation);
+  addAutorisation(autorisation: Autorisation): Observable<any> {
+    return this.http.post<any>(this.apiUrl, autorisation);
   }
 }

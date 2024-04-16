@@ -109,7 +109,7 @@ $(document).ready(function(){
 						<td><a href="{{document.linkDocument}}">{{document.linkDocument}}</a></td>
 						<td class="action-icons">
 							<div>
-								<button type="button" class="btn btn-primary btn-sm" (click)="shareDocument()">
+								<button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#shareModal" (click)="getDocument(document.uuid)">
 									<i class="material-icons" data-toggle="tooltip" title="Share">&#xE80D;</i>
 								</button>
 							</div>
@@ -134,7 +134,59 @@ $(document).ready(function(){
 </div>
 
 
-  
+  <!-- Share Modal -->
+  <div class="modal fade" id="shareModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+	  <div class="modal-content">
+		<!-- <div class="modal-header">
+		  <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+		  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		</div>
+		<div class="modal-body">
+		  ...
+		</div> -->
+		<div class="card">
+			<h5 class="card-header">Partager Le Document</h5>
+			<div class="card-body">
+				<h6 class="card-title mt-3">Le document choisie</h6>
+				<div class="card">
+					<div class="card-header bg-danger text-white">
+					  {{documentName}}
+					</div>
+				  </div>
+			  <h6 class="card-title mt-3">Essayer de selectionner utilisateur et l'accès approprié</h6>
+			  <div class="container">
+				<div class="row">
+				  <div class="col">
+					<select class="form-select" id="usersSelect" [(ngModel)]="selectedUserId" >
+					  <option value="" selected disabled hidden>Utilisateur</option>
+					  <!-- Options pour les utilisateurs -->
+					  <option *ngFor="let user of users" [value]="user.id">{{user.nom}}</option>
+					</select>
+				  </div>
+				</div>
+				<div class="row mt-3">
+					<div class="col">
+						<select class="form-select" id="rightsSelect" [(ngModel)]="selectedRole">
+						  <option value="" selected disabled hidden>Droit</option>
+						  <!-- Options pour les droits -->
+						  <option value="Lecture"><i class="fas fa-eye"></i> Lecture</option>
+						  <option value="Ecriture"><i class="fas fa-pen"></i> Ecriture</option>
+						  <option value="Autre"><i class="fas fa-cogs"></i> Autre</option>
+						  <!-- Ajoutez d'autres options au besoin -->
+						</select>
+					  </div>
+				</div>
+			  </div>
+			</div>
+		  </div>
+		<div class="modal-footer">
+		  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+		  <button type="button" class="btn btn-primary" (click)="addAutorisation()" data-bs-dismiss="modal">Partager</button>
+		</div>
+	  </div>
+	</div>
+  </div>
 
 </body>
 </html>
