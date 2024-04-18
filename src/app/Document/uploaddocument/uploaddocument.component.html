@@ -1,0 +1,11 @@
+<div class="container">
+  <h2>Importer un document</h2>
+  <form>
+    <div class="form-group">
+      <label for="document">Sélectionner un document</label>
+      <input type="file" class="form-control-file" id="document" (change)="importerDocument($event.target.files)">
+    </div>
+    <!-- Utilisation d'un type "button" au lieu de "submit" -->
+    <button type="button" class="btn btn-primary" (click)="importerDocument()">Importer</button>
+  </form>
+</div>
