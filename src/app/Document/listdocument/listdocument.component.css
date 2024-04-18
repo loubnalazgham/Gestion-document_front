@@ -8,7 +8,7 @@ body {
     margin: 30px 0;
 }
 .table-wrapper {
-	background: #fff;
+	background: #ffffff;
 	padding: 20px 25px;
 	border-radius: 3px;
 	min-width: 1000px;
@@ -215,10 +215,82 @@ table.table .avatar {
 .modal textarea.form-control {
 	resize: vertical;
 }
+.form-select {
+    width: 200px; /* Définissez la largeur souhaitée */
+  }
+  .form {
+    width: 200px; /* Définissez la largeur souhaitée */
+  }
+  
 .modal .btn {
 	border-radius: 2px;
 	min-width: 100px;
 }	
 .modal form label {
 	font-weight: normal;
+}
+.delete-button {
+    background-color: #dc3545;
+    border-color: #dc3545;
+    color: #fff;
+    padding: 0.375rem 0.75rem;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    border-radius: 0.25rem;
+}
+.action-icons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.action-icons > div {
+    margin-right: 0.5rem; /* Espace entre les icônes */
+}
+
+
+.delete-button:hover {
+    background-color: #c82333;
+    border-color: #bd2130;
+}
+
+.delete-button i {
+    vertical-align: middle;
+}
+
+.second  {
+    margin-top: 50px; /* Pousse le conteneur vers le bas */
+    width: 80%; /* Largeur du conteneur */
+      margin: 0 auto; /* Centrage horizontal */
+      display: flex; /* Utilisation de flexbox */
+      justify-content: center; /* Centrage horizontal du contenu */
+  }
+  .container-xl{
+	width: 80%; /* Largeur du conteneur */
+
+    margin-top: 100px; /* Pousse le conteneur vers le bas */
+    display: grid;
+    grid-template-columns: repeat(3, minmax(80px, 1fr)); /* Changer 80px selon vos besoins */
+    gap: 5px; /* Espace entre les colonnes */
+  }
+
+  .column-sm {
+    background-color: rgb(255, 255, 255); /* Couleur de fond pour mieux visualiser les colonnes */
+  }
+  .custom-date-input {
+    /* Ajoutez ici vos styles personnalisés */
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 0.25rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    outline: none;
+}
+
+/* Styliser la flèche de l'élément date */
+.custom-date-input::-webkit-calendar-picker-indicator {
+    background: transparent;
+    color: #333;
+    cursor: pointer;
+    padding: 0.25rem;
 }

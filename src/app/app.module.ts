@@ -1,27 +1,37 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { ListdocumentComponent } from './Document/listdocument/listdocument.component';
 import { UploaddocumentComponent } from './Document/uploaddocument/uploaddocument.component';
+import { HttpClientModule } from '@angular/common/http';
+
+import { FormsModule } from '@angular/forms';
+import { Routes, RouterModule } from '@angular/router';
+
 
 const routes: Routes = [
   { path: '', component: ListdocumentComponent },
-  { path: 'upload', component: UploaddocumentComponent }
+  { path: 'upload', component: UploaddocumentComponent },
+
 ];
 
 @NgModule({
   declarations: [
     AppComponent,
     ListdocumentComponent,
-    UploaddocumentComponent
+    UploaddocumentComponent,
   ],
   imports: [
     BrowserModule,
-    RouterModule.forRoot(routes)
+    HttpClientModule, // Ajouter HttpClientModule ici
+    RouterModule.forRoot(routes),
+    FormsModule
+
   ],
+  
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  exports: [RouterModule],
 })
 export class AppModule { }
