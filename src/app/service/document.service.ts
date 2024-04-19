@@ -46,7 +46,10 @@ export class DocumentService {
     let params = '';
     if (nom) params += `&nom=${nom}`;
     if (type) params += `&type=${type}`;
-    if (date_de_creation) params += `&date_de_creation=${date_de_creation.toISOString()}`;
+    // Assurez-vous que date_de_creation est bien un objet Date avant de continuer
+    if (date_de_creation instanceof Date) {
+      params += `&date_de_creation=${date_de_creation.toISOString()}`;
+    }
     
     if (params.length > 0) {
       params = '?' + params.substr(1);
@@ -59,4 +62,6 @@ export class DocumentService {
   downloadFile(id: number): Observable<any> {
     return this.http.get(`${this.apiUrl}/download/${id}`, { responseType: 'blob' });
   }
+  
 }
+

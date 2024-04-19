@@ -8,6 +8,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { FormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
+import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 const routes: Routes = [
@@ -26,7 +27,9 @@ const routes: Routes = [
     BrowserModule,
     HttpClientModule, // Ajouter HttpClientModule ici
     RouterModule.forRoot(routes),
-    FormsModule
+    FormsModule,
+    NgbModalModule
+
 
   ],
   

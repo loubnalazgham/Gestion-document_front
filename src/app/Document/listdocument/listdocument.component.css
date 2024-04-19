@@ -16,8 +16,8 @@ body {
 }
 .table-title {        
 	padding-bottom: 15px;
-	background: #ffffff;
-	color: #868585e1;
+	background: #17a2b8 ;
+	color: #ffffffe1;
 	padding: 16px 30px;
 	min-width: 100%;
 	margin: -20px -25px 10px;
@@ -30,6 +30,23 @@ body {
 .table-title .btn-group {
 	float: right;
 }
+.table-horizontal {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.table-horizontal tr {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 10px;
+}
+
+.table-horizontal td {
+    flex: 1;
+    padding-right: 10px;
+}
+
 .table-title .btn {
 	color: #fff;
 	float: right;
@@ -77,6 +94,7 @@ table.table td:last-child i {
 	font-size: 22px;
 	margin: 0 5px;
 }
+
 table.table td a {
 	font-weight: bold;
 	color: #566787;
@@ -190,14 +208,14 @@ table.table .avatar {
 	background: #ddd;
 }
 /* Modal styles */
-.modal .modal-dialog {
+/* .modal .modal-dialog {
 	max-width: 400px;
 }
 .modal .modal-header, .modal .modal-body, .modal .modal-footer {
 	padding: 20px 30px;
 }
 .modal .modal-content {
-	border-radius: 3px;
+	border-radius: 10px;
 	font-size: 14px;
 }
 .modal .modal-footer {
@@ -214,7 +232,7 @@ table.table .avatar {
 }
 .modal textarea.form-control {
 	resize: vertical;
-}
+} */
 .form-select {
     width: 200px; /* Définissez la largeur souhaitée */
   }
@@ -265,18 +283,50 @@ table.table .avatar {
       display: flex; /* Utilisation de flexbox */
       justify-content: center; /* Centrage horizontal du contenu */
   }
-  .container-xl{
-	width: 80%; /* Largeur du conteneur */
-
+  .container-xl {
+    width: 80%; /* Largeur du conteneur */
     margin-top: 100px; /* Pousse le conteneur vers le bas */
     display: grid;
-    grid-template-columns: repeat(3, minmax(80px, 1fr)); /* Changer 80px selon vos besoins */
+    grid-template-columns: repeat(5, minmax(80px, 1fr)); /* Changer 80px selon vos besoins */
     gap: 5px; /* Espace entre les colonnes */
-  }
+    border: 2px solid #17a2b8 ; /* Cadre de 1 pixel solide, couleur #17a2b8 */
+	padding: 30px; /* Ajoute un espacement de 20 pixels à l'intérieur du cadre */
+	border-radius: 10px; /* Ajoute un rayon de 10 pixels aux coins du cadre */
 
-  .column-sm {
+
+}
+   
+
+.confirmation-text {
+    text-align: center; /* Centrer le texte */
+    margin: 0; /* Supprimer les marges */
+    padding: 0; /* Supprimer le remplissage */
+    border: none; /* Supprimer la bordure */
+}
+
+
+.column-sm {
     background-color: rgb(255, 255, 255); /* Couleur de fond pour mieux visualiser les colonnes */
-  }
+}
+
+.btn {
+    padding: 0.375rem 0.75rem; /* Ajustement du padding */
+}
+
+/* Pour espacer les boutons "Search" et "Reset" */
+.column-sm:nth-child(4),
+.column-sm:nth-child(5) {
+    grid-column: auto / span 1; /* Permet d'occuper 1 colonne */
+}
+
+
+/* Pour espacer les boutons "Search" et "Reset" */
+.column-sm:nth-child(4),
+.column-sm:nth-child(5) {
+    grid-column: auto / span 1; /* Permet d'occuper 1 colonne */
+}
+
+
   .custom-date-input {
     /* Ajoutez ici vos styles personnalisés */
     padding: 0.5rem;
@@ -294,3 +344,15 @@ table.table .avatar {
     cursor: pointer;
     padding: 0.25rem;
 }
+.metadata-key {
+    font-weight: bold;
+}
+
+.metadata-value {
+    font-style: italic;
+}
+.icon-document {
+    color: #000000; /* Bleu foncé */
+}
+
+

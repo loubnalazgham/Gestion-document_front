@@ -1,140 +1,190 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Bootstrap CRUD Data Table for Database with Modal Form</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
-<!-- <script>
-$(document).ready(function(){
-	// Activate tooltip
-	$('[data-toggle="tooltip"]').tooltip();
-	
-	// Select/Deselect checkboxes
-	var checkbox = $('table tbody input[type="checkbox"]');
-	$("#selectAll").click(function(){
-		if(this.checked){
-			checkbox.each(function(){
-				this.checked = true;                        
-			});
-		} else{
-			checkbox.each(function(){
-				this.checked = false;                        
-			});
-		} 
-	});
-	checkbox.click(function(){
-		if(!this.checked){
-			$("#selectAll").prop("checked", false);
-		}
-	});
-});
-</script> -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Bootstrap CRUD Data Table for Database with Modal Form</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 </head>
 <body>
-	<div class="container-xl">
-		<div class="column-sm">
-		  <form class="form">
-			<input type="search" class="form-control" placeholder="Search..." aria-label="Search" [(ngModel)]="searchTerm">
-		  </form>
-		</div>
-		<div class="column-sm">
-			<select class="form-select" aria-label="Default select example" [(ngModel)]="selectedType">
-				<option value="" selected disabled>Type</option>
-				<option *ngFor="let type of documentTypes" [value]="type">{{ type }}</option>
-			</select>
-		</div>
-		
-		<div class="column-sm">
-			<input type="date" class="form-control" [(ngModel)]="dateSelected">
-		  </div>
-		  <div class="column-sm">
-			<button class="btn btn-primary" (click)="search()">Search</button>
-		  </div>
-		  <div class="column-sm">
-			<button class="btn btn-primary" (click)="resetFilters()">Reset</button>
-		  </div>
-		  
-	  </div>
-	  
-      <div class="container-xl " class="second">
-
-	<div class="table-responsive">
-		<div class="table-wrapper">
-			<div class="table-title">
-				<div class="row">
-					<div class="col-sm-6">
-						<h2>Liste <b>Documents</b></h2>
-					</div>
-					<div class="col-sm-6">
-            <button class="btn btn-success" (click)="afficherPopup()">
-                <i class="material-icons">&#xE147;</i> <span>Importer</span>
+    <nav class="navbar navbar-dark bg-info">
+        <a class="navbar-brand" href="#" style="display: flex; align-items: center;">
+            <i class="material-icons" style="font-size: 24px;">account_circle</i>
+            <span class="navbar-text" style="font-size: 24px; margin-left: 5px;">DocUser</span>
+        </a>
+    </nav>
+    
+    <div class="container-xl">
+        <div class="column-sm">
+            <form class="form">
+                <input [(ngModel)]="searchTerm" name="searchTerm" class="form-control" placeholder="Search..." aria-label="Search">
+            </form>
+        </div>
+        <div class="column-sm">
+            <select class="form-select" aria-label="Default select example" [(ngModel)]="selectedType">
+                <option value="" selected disabled style="color: gray;">Type</option>
+                <option *ngFor="let type of documentTypes" [value]="type">{{ type }}</option>
+            </select>
+        </div>
+        <div class="column-sm">
+            <input type="date" class="form-control" [(ngModel)]="dateSelected">
+        </div>
+        <div class="column-sm" style="display: flex;">
+            <button class="btn btn-info" (click)="search()" style="flex: 1; margin-right: 5px;">Search</button>
+            <button class="btn btn-info" (click)="resetFilters()" style="flex: 1;">
+                <i class="material-icons">refresh</i>
             </button>
         </div>
-				</div>
-			</div>
-			<table class="table table-striped table-hover">
-				<thead>
-					<tr>
-						<th>
-							<span class="custom-checkbox">
-								<input type="checkbox" id="selectAll">
-								<label for="selectAll"></label>
-							</span>
-						</th>
-						<th>Nom du document</th>
-						<th>Type du document</th>
-						<th>Date de creation</th>
-						<th>lien du document</th>
-						<th>Actions</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr *ngFor="let document of documents">
-						<td>
-						  <span class="custom-checkbox">
-							<input type="checkbox" id="checkbox{{document.uuid}}" name="options[]" value="{{document.uuid}}">
-							<label for="checkbox{{document.uuid}}"></label>
-						  </span>
-						</td>
-						<td>{{document.nomDocument}}</td> 
-						<td>{{document.typeDocument}}</td> 
-						<td>{{document.dateCreation}}</td> 
-						<td><a href="{{document.linkDocument}}">{{document.linkDocument}}</a></td>
-						<td class="action-icons">
-							<div>
-								<button type="button" class="btn btn-primary btn-sm" (click)="shareDocument()">
-									<i class="material-icons" data-toggle="tooltip" title="Share">&#xE80D;</i>
-								</button>
-							</div>
-						
-							<div>
-								<button type="button" class="btn btn-danger btn-sm" (click)="deleteDocument(document.uuid)">
-									<i class="material-icons">&#xE872;</i>
-								</button>
-							</div>
-							
-							
-						</td>
-						
-					</tr>
-					
-					
-				</tbody>
-			</table>
-			
-		</div>
-	</div>        
-</div>
-
-
-  
-
+    </div>
+    
+    <div class="container-xl " class="second">
+        <div class="table-responsive">
+            <div class="table-wrapper">
+                <div class="table-title">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <h2>Liste <b>Documents</b></h2>
+                        </div>
+                    </div>
+                </div>
+                <table class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>
+                                <span class="custom-checkbox">
+                                    <input type="checkbox" id="selectAll">
+                                    <label for="selectAll"></label>
+                                </span>
+                            </th>
+                            <th>Nom du document</th>
+                            <th>Type du document</th>
+                            <th>Date de creation</th>
+                            <th>lien du document</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let document of documents">
+                            <td>
+                                <span class="custom-checkbox">
+                                    <input type="checkbox" id="checkbox{{document.uuid}}" name="options[]" value="{{document.uuid}}">
+                                    <label for="checkbox{{document.uuid}}"></label>
+                                </span>
+                            </td>
+                            <td>{{document.nomDocument}}</td> 
+                            <td>{{document.typeDocument}}</td> 
+                            <td>{{document.dateCreation}}</td> 
+                            <td>
+                                <a href="{{document.linkDocument}}" target="_blank" style="display: flex; align-items: center;">
+                                    <i class="material-icons" style="margin-right: 5px;">link</i>{{document.nomDocument}}
+                                </a>
+                            </td>
+                            <td class="action-icons">
+                                <style>
+                                    .custom-btn-sm {
+                                        padding: 0.25rem 0.5rem;
+                                        font-size: 0.6rem;
+                                    }
+                                </style>
+                                <div>
+                                    <button type="button" class="btn btn-primary custom-btn-sm" (click)="shareDocument(document.uuid)">
+                                        <i class="material-icons" data-toggle="tooltip" title="Share">&#xE80D;</i>
+                                    </button>
+                                </div>
+                                <div>
+                                    <button type="button" class="btn btn-info custom-btn-sm" (click)="openDetails(document, detailsModal)">
+                                        <i class="material-icons" data-toggle="tooltip" title="Details">&#xE88E;</i>
+                                    </button>
+                                </div>
+                                <div>
+                                    <button type="button" class="btn btn-success custom-btn-sm" (click)="downloadDocument(document.uuid)">
+                                        <i class="material-icons">file_download</i>
+                                    </button>
+                                </div>
+                                <ng-template #detailsModal let-modal="close">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h4 class="modal-title">Détails du Document</h4>
+                                            <button type="button" class="close" aria-label="Close" (click)="modal()">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="table-responsive">
+                                                <table class="table table-bordered table-striped">
+                                                    <tbody>
+                                                        <tr>
+                                                            <th scope="row" class="bg-info text-white" style="width: 30%;">Nom du document:</th>
+                                                            <td style="width: 70%; word-wrap: break-word;">{{ selectedDocument?.nomDocument }}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th scope="row" class="bg-info text-white" style="width: 30%;">Type du document:</th>
+                                                            <td style="width: 70%; word-wrap: break-word;">{{ selectedDocument?.typeDocument }}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th scope="row" class="bg-info text-white" style="width: 30%;">Date de création:</th>
+                                                            <td style="width: 70%; word-wrap: break-word;">{{ selectedDocument?.dateCreation }}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th scope="row" class="bg-info text-white" style="width: 30%;">Métadonnées:</th>
+                                                            <td style="width: 70%; word-wrap: break-word;">
+                                                                <span *ngIf="selectedDocument?.metadata">
+                                                                    <ng-container *ngIf="parseMetadata(selectedDocument.metadata)">
+                                                                        <ng-container *ngFor="let metadata of parseMetadata(selectedDocument.metadata) | keyvalue">
+                                                                            <span class="metadata-key">{{ metadata.key }}</span>: 
+                                                                            <span class="metadata-value">{{ metadata.value }}</span><br>
+                                                                        </ng-container>
+                                                                    </ng-container>
+                                                                </span>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" (click)="modal('Save click')">Fermer</button>
+                                        </div>
+                                    </div>
+                                </ng-template>
+                                <ng-template #confirmDeleteModal let-modal>
+                                    <div class="modal-header">
+                                        <h4 class="modal-title">Confirmer la suppression du document</h4>
+                                        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p class="confirmation-text">Êtes-vous sûr de vouloir supprimer ce document ?</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" (click)="modal.dismiss()">Annuler</button>
+                                        <button type="button" class="btn btn-danger" (click)="confirmDelete()">Supprimer</button>
+                                    </div>
+                                </ng-template>
+                                <div>
+                                    <button type="button" class="btn btn-danger custom-btn-sm" (click)="openConfirmDeleteModal(document.uuid)">
+                                        <i class="material-icons">&#xE872;</i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div>
+                    <button class="btn btn-success" (click)="afficherPopup()" style="display: flex; align-items: center;">
+                        <i class="material-icons" style="margin-right: 5px;">&#xE147;</i>
+                        <span>Importer</span>
+                    </button>
+                </div>
+            </div>
+        </div>        
+    </div>
 </body>
 </html>
